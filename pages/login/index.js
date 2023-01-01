@@ -23,7 +23,7 @@ const Login = () => {
                             <input type="password" id="password" name="password" className="w-full px-3 py-1 text-base leading-8 text-gray-100 transition-colors duration-200 ease-in-out bg-gray-600 border border-gray-600 rounded outline-none bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-blue-900 focus:border-blue-500" />
                         </div>
                         <button className="px-8 py-1 text-lg text-white bg-blue-500 border-0 rounded focus:outline-none hover:bg-blue-600">Login</button>
-                        <p className="mt-3">Don't have an account? <Link href="/signup"><a class="font-bold">Signup.</a></Link></p>
+                        <p className="mt-3">Don't have an account? <Link href="/signup"><span class="font-bold">Signup.</span></Link></p>
                     </div>
                 </div>
             </section>
