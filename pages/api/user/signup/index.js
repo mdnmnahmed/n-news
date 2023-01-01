@@ -3,7 +3,7 @@ import { dbConnect } from "../../../../service_backend/lib/dbConnect";
 import UserModal from "../../../../service_backend/modals/UserModal";
 import { errorHandler } from "../../../../service_backend/utils/errorHandler";
 import { responseHandler } from "../../../../service_backend/utils/responseHandler";
-import { validateInputFields } from "../../../../service_backend/utils/validateInputFields";
+import { validateInputFields } from "../../../../utils_global/validateInputFields";
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -25,9 +25,9 @@ export default async function handler(req, res) {
         const savedUser = await user.save();
         if (savedUser) {
             delete savedUser._doc.password;
-            responseHandler(savedUser, res, 'Signup Success');
+            responseHandler(res, savedUser, 'Signup Success');
         }
     } catch (error) {
-        errorHandler(error, res, 'Failed to Signup, please try again');
+        errorHandler(res, error, error?.customMessage || 'Failed to Signup, please try again.');
     }
 } 

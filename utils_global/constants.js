@@ -1,0 +1,1 @@
+export const N_NEWS_TOKEN = "n-news-token";
