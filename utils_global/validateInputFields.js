@@ -1,7 +1,10 @@
 export const validateInputFields = (fields) => {
     for (let key in fields) {
         if (!fields[key] || fields[key].trim() === "") {
-            throw `${key} is Required, please fill ${key}.`;
+            const error = {
+                customMessage: `'${key}' field is Required, please enter '${key}'.`,
+            }
+            throw error;
         }
     }
 }

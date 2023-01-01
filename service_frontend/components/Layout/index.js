@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import React from 'react';
 import Navigation from '../Navigation';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Layout = ({ children }) => {
     return (
@@ -14,6 +16,18 @@ const Layout = ({ children }) => {
                 <Navigation />
                 {children}
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </>
     );
 }
