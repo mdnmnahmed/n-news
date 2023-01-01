@@ -13,19 +13,19 @@ const Navigation = ({ navColor }) => {
                     </a>
                     <nav className="flex flex-wrap items-center justify-center text-base md:ml-auto md:mr-auto">
                         <Link href={`/`}>
-                            <a className="mr-5 hover:text-white">Home</a>
+                            <span className="mr-5 hover:text-white">Home</span>
                         </Link>
 
                         <Link href={`/user`}>
-                            <a className="mr-5 hover:text-white">User</a>
+                            <span className="mr-5 hover:text-white">User</span>
                         </Link>
 
                         <Link href={`/post`}>
-                            <a className="mr-5 hover:text-white">Posts</a>
+                            <span className="mr-5 hover:text-white">Posts</span>
                         </Link>
 
                         <Link href={`/about`}>
-                            <a className="mr-5 hover:text-white">About</a>
+                            <span className="mr-5 hover:text-white">About</span>
                         </Link>
                     </nav>
                     <Link href={`/login`}>
