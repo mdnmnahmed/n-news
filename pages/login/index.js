@@ -1,7 +1,38 @@
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useRef } from 'react';
+import { validateInputFields } from '../../utils_global/validateInputFields';
+import { toast } from 'react-toastify';
+import { getSession, signIn } from 'next-auth/react';
+
 
 const Login = () => {
+    const { push } = useRouter();
+
+    const emailRef = useRef();
+    const passwordRef = useRef();
+
+    const submitLoginForm = async (event) => {
+        event.preventDefault();
+        const fields = {
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+        }
+        try {
+            validateInputFields(fields);
+            const userData = await signIn("credentials", { ...fields, redirect: false });
+            console.log("userData: ", userData);
+            if (userData.error) {
+                toast.error(userData.error);
+                return;
+            }
+            push('/');
+        } catch (error) {
+            toast.error(error?.message || error?.customMessage);
+            console.log('error ', error);
+        }
+    }
+
     return (
         <>
             <section className="text-gray-400 body-font">
@@ -14,15 +45,17 @@ const Login = () => {
                     </div>
                     <div className="flex flex-col w-full p-8 mt-10 bg-gray-800 bg-opacity-50 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
                         <h2 className="mb-5 text-lg font-medium text-white title-font">Login</h2>
-                        <div className="relative mb-4">
-                            <label htmlFor="email" className="text-sm leading-7 text-gray-400">Email</label>
-                            <input type="email" id="email" name="email" className="w-full px-3 py-1 text-base leading-8 text-gray-100 transition-colors duration-200 ease-in-out bg-gray-600 border border-gray-600 rounded outline-none bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-blue-900 focus:border-blue-500" />
-                        </div>
-                        <div className="relative mb-4">
-                            <label htmlFor="password" className="text-sm leading-7 text-gray-400">Password</label>
-                            <input type="password" id="password" name="password" className="w-full px-3 py-1 text-base leading-8 text-gray-100 transition-colors duration-200 ease-in-out bg-gray-600 border border-gray-600 rounded outline-none bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-blue-900 focus:border-blue-500" />
-                        </div>
-                        <button className="px-8 py-1 text-lg text-white bg-blue-500 border-0 rounded focus:outline-none hover:bg-blue-600">Login</button>
+                        <form onSubmit={submitLoginForm}>
+                            <div className="relative mb-4">
+                                <label htmlFor="email" className="text-sm leading-7 text-gray-400">Email</label>
+                                <input ref={emailRef} type="email" id="email" name="email" className="w-full px-3 py-1 text-base leading-8 text-gray-100 transition-colors duration-200 ease-in-out bg-gray-600 border border-gray-600 rounded outline-none bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-blue-900 focus:border-blue-500" />
+                            </div>
+                            <div className="relative mb-4">
+                                <label htmlFor="password" className="text-sm leading-7 text-gray-400">Password</label>
+                                <input ref={passwordRef} type="password" id="password" name="password" className="w-full px-3 py-1 text-base leading-8 text-gray-100 transition-colors duration-200 ease-in-out bg-gray-600 border border-gray-600 rounded outline-none bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-blue-900 focus:border-blue-500" />
+                            </div>
+                            <button type="submit" className="px-8 py-1 text-lg text-white bg-blue-500 border-0 rounded focus:outline-none hover:bg-blue-600">Login</button>
+                        </form>
                         <p className="mt-3">Don't have an account? <Link href="/signup"><span className="font-bold">Signup.</span></Link></p>
                     </div>
                 </div>
