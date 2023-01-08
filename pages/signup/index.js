@@ -4,9 +4,12 @@ import { toast } from 'react-toastify';
 import { validateInputFields } from '../../utils_global/validateInputFields';
 import { apiCallsHandler } from '../../service_frontend/utils/apiCallsHandler';
 import { useRouter } from 'next/router';
+import { checkRouteProtected } from '../../service_frontend/utils/checkRouteProtected';
+import { useStore } from '../../service_frontend/store';
 
 const Signup = () => {
-    const { push } = useRouter();
+    const { push, replace } = useRouter();
+    const [state, dispatch] = useStore();
 
     const nameRef = useRef();
     const emailRef = useRef();
@@ -32,6 +35,10 @@ const Signup = () => {
             console.log('error ', error);
         }
     }
+
+    useEffect(() => {
+        checkRouteProtected({ state, dispatch, replace });
+    }, []);
 
     return (
         <>

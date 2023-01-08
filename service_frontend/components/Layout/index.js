@@ -1,10 +1,21 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navigation from '../Navigation';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useStore } from '../../store';
+import { useRouter } from 'next/router';
+import { authenticateUser } from '../../utils/authenticateUser';
 
 const Layout = ({ children }) => {
+
+    const { replace } = useRouter();
+    const [state, dispatch] = useStore();
+
+    useEffect(() => {
+        authenticateUser({ state, dispatch, replace });
+    }, []);
+
     return (
         <>
             <Head>
