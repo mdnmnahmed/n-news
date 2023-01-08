@@ -1,42 +1,46 @@
 import Link from 'next/link';
 import React from 'react';
+import { useStore } from '../../store';
 
 const Navigation = ({ navColor }) => {
+
+    const [state, dispatch] = useStore();
+
     return (
         <>
-            <header className="text-gray-400 body-font" style={{}}>
-                <div className="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
-                    <a className="flex items-center mb-4 font-medium text-white title-font md:mb-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-10 h-10 p-2 text-white bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-                        </svg>
-                        <span className="ml-3 text-xl">N-News</span>
-                    </a>
-                    <nav className="flex flex-wrap items-center justify-center text-base md:ml-auto md:mr-auto">
-                        <Link href={`/`}>
-                            <span className="mr-5 hover:text-white">Home</span>
-                        </Link>
-
-                        <Link href={`/user`}>
-                            <span className="mr-5 hover:text-white">User</span>
-                        </Link>
-
-                        <Link href={`/post`}>
-                            <span className="mr-5 hover:text-white">Posts</span>
-                        </Link>
-
-                        <Link href={`/about`}>
-                            <span className="mr-5 hover:text-white">About</span>
-                        </Link>
-                    </nav>
-                    <Link href={`/login`}>
-                        <button className="inline-flex items-center px-3 py-1 mt-4 text-base bg-gray-800 border-0 rounded focus:outline-none hover:bg-gray-700 md:mt-0">
-                            Login
-                            <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                                <path d="M5 12h14M12 5l7 7-7 7"></path>
-                            </svg>
+            <header className="text-gray-400 body-font">
+                <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+                    <div class="flex items-center flex-shrink-0 text-white mr-6">
+                        <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 22.1c1.8-7.2 0.3-10.8 13.5-10.8 10.8 0 12.15 8.1 1.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 5-12.15-8.1-17.55-9.45-3.6-6.45-9.45"></path></svg>
+                        <span class="font-semibold text-xl tracking-tight">N-News</span>
+                    </div>
+                    <div class="block lg:hidden">
+                        <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+                            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
                         </button>
-                    </Link>
-                </div>
+                    </div>
+                    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden md:block">
+                        <div class="text-sm lg:flex-grow">
+                            <Link href={`/`} class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Home
+                            </Link>
+                            <Link href={`/news`} class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                News
+                            </Link>
+                        </div>
+                        <div>
+                            {state?.user?.authenticated ? (
+                                <Link href={`login`} class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
+                                    Logout
+                                </Link>
+                            ) : (
+                                <Link href={`login`} class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
+                                    Login
+                                    </Link>
+                            )}
+                        </div>
+                    </div>
+                </nav>
             </header>
         </>
     );
