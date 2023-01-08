@@ -1,15 +1,16 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { validateInputFields } from '../../utils_global/validateInputFields';
 import { toast } from 'react-toastify';
 import { getSession, signIn } from 'next-auth/react';
 import { useStore } from '../../service_frontend/store';
 import { authConstants } from '../../service_frontend/store/constants';
+import { checkRouteProtected } from '../../service_frontend/utils/checkRouteProtected';
 
 
 const Login = () => {
-    const { push } = useRouter();
+    const { push, replace } = useRouter();
     const [state, dispatch] = useStore();
 
     const emailRef = useRef();
@@ -52,6 +53,10 @@ const Login = () => {
             });
         }
     }
+
+    useEffect(() => {
+        checkRouteProtected({ state, dispatch, replace });
+    }, []);
 
     return (
         <>
