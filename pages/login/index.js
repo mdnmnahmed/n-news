@@ -4,10 +4,13 @@ import React, { useRef } from 'react';
 import { validateInputFields } from '../../utils_global/validateInputFields';
 import { toast } from 'react-toastify';
 import { getSession, signIn } from 'next-auth/react';
+import { useStore } from '../../service_frontend/store';
+import { authConstants } from '../../service_frontend/store/constants';
 
 
 const Login = () => {
     const { push } = useRouter();
+    const [state, dispatch] = useStore();
 
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -20,16 +23,33 @@ const Login = () => {
         }
         try {
             validateInputFields(fields);
+            dispatch({ type: authConstants.LOGIN_REQUEST });
             const userData = await signIn("credentials", { ...fields, redirect: false });
             console.log("userData: ", userData);
             if (userData.error) {
                 toast.error(userData.error);
                 return;
             }
+            const session = await getSession();
+            const { id, name, email } = session.token;
+            dispatch({
+                type: authConstants.LOGIN_SUCCESS,
+                payload: { id, name, email }
+            });
+
+            // console.log("session: ", { id, name, email });
+
+
+
             push('/');
         } catch (error) {
-            toast.error(error?.message || error?.customMessage);
+            const errorMessage = error?.message || error?.customMessage;
+            toast.error(errorMessage);
             console.log('error ', error);
+            dispatch({
+                type: authConstants.LOGIN_FAILURE,
+                payload: errorMessage
+            });
         }
     }
 
