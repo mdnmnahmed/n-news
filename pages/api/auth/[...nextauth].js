@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import bcrypt from 'bcrypt';
 import CredentialsProvider from "next-auth/providers/credentials";
 import UserModal from "../../../service_backend/modals/UserModal";
+import { dbConnect } from "../../../service_backend/lib/dbConnect";
 
 export default NextAuth({
     providers: [
@@ -21,6 +22,7 @@ export default NextAuth({
                 if (!email.trim() || !password.trim()) {
                     throw new Error(`Please enter Email & Password.`);
                 }
+                await dbConnect();
                 const user = await UserModal.findOne({ email }).exec();
                 if (!user) {
                     throw new Error(`Email & Password is incorrect, please try again.`);
