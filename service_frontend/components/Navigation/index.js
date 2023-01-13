@@ -1,10 +1,21 @@
 import Link from 'next/link';
 import React from 'react';
 import { useStore } from '../../store';
+import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { authConstants } from '../../store/constants';
 
 const Navigation = ({ navColor }) => {
 
+    const { replace } = useRouter();
     const [state, dispatch] = useStore();
+
+    const logoutHandler = async (event) => {
+        event.preventDefault();
+        await signOut({ redirect: false });
+        dispatch({ type: authConstants.LOGIN_FAILURE });
+        replace('/login');
+    }
 
     return (
         <>
@@ -30,9 +41,11 @@ const Navigation = ({ navColor }) => {
                         </div>
                         <div>
                             {state?.user?.authenticated ? (
-                                <Link href={`login`} class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
+                                <button class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+                                    onClick={logoutHandler}
+                                >
                                     Logout
-                                </Link>
+                                </button>
                             ) : (
                                 <Link href={`login`} class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
                                     Login
