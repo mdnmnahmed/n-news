@@ -26,7 +26,6 @@ const Login = () => {
             validateInputFields(fields);
             dispatch({ type: authConstants.LOGIN_REQUEST });
             const userData = await signIn("credentials", { ...fields, redirect: false });
-            console.log("userData: ", userData);
             if (userData.error) {
                 toast.error(userData.error);
                 return;
@@ -37,7 +36,6 @@ const Login = () => {
                 type: authConstants.LOGIN_SUCCESS,
                 payload: { id, name, email }
             });
-            push('/');
         } catch (error) {
             const errorMessage = error?.message || error?.customMessage;
             toast.error(errorMessage);
