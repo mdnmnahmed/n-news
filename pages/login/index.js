@@ -37,11 +37,6 @@ const Login = () => {
                 type: authConstants.LOGIN_SUCCESS,
                 payload: { id, name, email }
             });
-
-            // console.log("session: ", { id, name, email });
-
-
-
             push('/');
         } catch (error) {
             const errorMessage = error?.message || error?.customMessage;
@@ -55,8 +50,10 @@ const Login = () => {
     }
 
     useEffect(() => {
-        checkRouteProtected({ state, dispatch, replace });
-    }, []);
+        if (!state.user.authenticating) {
+            checkRouteProtected({ state, dispatch, replace });
+        }
+    }, [state.user.authenticated]);
 
     return (
         <>
