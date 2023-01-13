@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { validateInputFields } from '../../utils_global/validateInputFields';
 import { apiCallsHandler } from '../../service_frontend/utils/apiCallsHandler';
@@ -37,8 +37,10 @@ const Signup = () => {
     }
 
     useEffect(() => {
-        checkRouteProtected({ state, dispatch, replace });
-    }, []);
+        if (!state.user.authenticating) {
+            checkRouteProtected({ state, dispatch, replace });
+        }
+    }, [state.user.authenticated]);
 
     return (
         <>

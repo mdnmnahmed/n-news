@@ -19,7 +19,6 @@ const reducer = (state, action) => {
         }
 
         case authConstants.LOGIN_SUCCESS: {
-            console.log("here: LOGIN_SUCCESS");
             return {
                 ...state,
                 user: {
@@ -35,7 +34,7 @@ const reducer = (state, action) => {
                 ...state,
                 user: {
                     ...state.user,
-                    authenticated: true,
+                    authenticated: false,
                     authenticating: false,
                 }
             }
