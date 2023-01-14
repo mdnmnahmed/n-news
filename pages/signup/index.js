@@ -39,7 +39,7 @@ const Signup = () => {
 
     useEffect(() => {
         if (!state.user.authenticating) {
-            checkRouteProtected({ state, dispatch, replace });
+            checkRouteProtected({ state, dispatch, replace, unAuthRedirect: '/signup' });
         }
     }, [state.user.authenticated]);
 
