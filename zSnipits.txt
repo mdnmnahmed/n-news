@@ -1,0 +1,16 @@
+//*** Code for Protect Routing Components Start ***
+    const [state, dispatch] = useStore();
+    const { push, replace } = useRouter();
+
+    useEffect(() => {
+        if (!state.user.authenticating) {
+            checkRouteProtected({ state, dispatch, replace });
+        }
+    }, [state.user.authenticated]);
+
+    if (state.user.authenticating) {
+        return (
+            <Loader />
+        );
+    }
+//*** Code for Protect Routing Components End ***

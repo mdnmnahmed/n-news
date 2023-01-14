@@ -7,6 +7,7 @@ import { getSession, signIn } from 'next-auth/react';
 import { useStore } from '../../service_frontend/store';
 import { authConstants } from '../../service_frontend/store/constants';
 import { checkRouteProtected } from '../../service_frontend/utils/checkRouteProtected';
+import Loader from '../../service_frontend/components/SharedComponent.js/Loader';
 
 
 const Login = () => {
@@ -52,6 +53,12 @@ const Login = () => {
             checkRouteProtected({ state, dispatch, replace });
         }
     }, [state.user.authenticated]);
+
+    if (state.user.authenticating) {
+        return (
+            <Loader />
+        );
+    }
 
     return (
         <>

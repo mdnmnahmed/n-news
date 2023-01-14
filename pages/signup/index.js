@@ -6,6 +6,7 @@ import { apiCallsHandler } from '../../service_frontend/utils/apiCallsHandler';
 import { useRouter } from 'next/router';
 import { checkRouteProtected } from '../../service_frontend/utils/checkRouteProtected';
 import { useStore } from '../../service_frontend/store';
+import Loader from '../../service_frontend/components/SharedComponent.js/Loader';
 
 const Signup = () => {
     const { push, replace } = useRouter();
@@ -41,6 +42,12 @@ const Signup = () => {
             checkRouteProtected({ state, dispatch, replace });
         }
     }, [state.user.authenticated]);
+
+    if (state.user.authenticating) {
+        return (
+            <Loader />
+        );
+    }
 
     return (
         <>
