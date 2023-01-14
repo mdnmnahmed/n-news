@@ -1,9 +1,9 @@
-export const checkRouteProtected = ({ state, dispatch, replace }) => {
+export const checkRouteProtected = ({ state, dispatch, replace, authRedirect = '/', unAuthRedirect = '/login' }) => {
     if (state.user.authenticated) {
         console.log('redirecting: ', state.user.authenticated);
-        replace('/');
+        replace(authRedirect);
         return null;
     }
-    replace('/login');
+    replace(unAuthRedirect);
     return null;
 }
