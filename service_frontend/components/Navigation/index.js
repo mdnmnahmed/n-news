@@ -35,13 +35,13 @@ const Navigation = ({ navColor }) => {
                             <Link href={`/`} className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-white">
                                 Home
                             </Link>
-                            <Link href={`/news`} className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-white">
-                                News
+                            <Link href={`/post/create`} className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-white">
+                                Create
                             </Link>
                         </div>
                         <div>
                             {state?.user?.authenticated ? (
-                                <button class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+                                <button className="inline-block px-4 py-2 mt-4 text-sm leading-none text-white border border-white rounded hover:border-transparent hover:text-teal-500 hover:bg-white lg:mt-0"
                                     onClick={logoutHandler}
                                 >
                                     Logout
