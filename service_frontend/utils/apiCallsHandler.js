@@ -9,7 +9,7 @@
 
 import axios from "axios";
 import { toast } from "react-toastify";
-import { getCookie } from "./cookiesHandler";
+// import { getCookie } from "./cookiesHandler";
 import { N_NEWS_TOKEN } from "../../utils_global/constants";
 
 /**
@@ -22,7 +22,8 @@ import { N_NEWS_TOKEN } from "../../utils_global/constants";
  */
 export const apiCallsHandler = async (endpoint, method = "GET", data = null, endpointPrefix = "api") => {
     const API_URL = (process.env.API_BASE_URL || 'http://localhost:3000/') + endpointPrefix + endpoint;
-    const nNewsToken = getCookie(N_NEWS_TOKEN) || '';
+    // const nNewsToken = getCookie(N_NEWS_TOKEN) || '';
+    const nNewsToken = '';
     let config = {
         method: method,
         url: API_URL,

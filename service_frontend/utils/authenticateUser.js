@@ -3,13 +3,13 @@ import { authConstants } from "../store/constants";
 
 export const authenticateUser = async ({ state, dispatch, replace }) => {
     const authenticated = state.user.authenticated || false;
-    console.log('authenticated: ', authenticated);
+    // console.log('authenticated: ', authenticated);
     if (!authenticated) {
         dispatch({
             type: authConstants.LOGIN_REQUEST
         })
         const session = await getSession();
-        console.log("session: ", session);
+        // console.log("session: ", session);
         if (session?.token) {
             dispatch({
                 type: authConstants.LOGIN_SUCCESS,

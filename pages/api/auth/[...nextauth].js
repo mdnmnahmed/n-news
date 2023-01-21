@@ -39,7 +39,7 @@ export default NextAuth({
     ],
     callbacks: {
         async session(session, user) {
-            console.log("session: ", session);
+            // console.log("session: ", session);
             return session;
         },
         async jwt({ token, user, account, profile, isNewUser }) {
