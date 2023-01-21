@@ -23,6 +23,8 @@ export default function Home({ posts, hasError }) {
         );
     }
 
+    console.log("posts: ", posts);
+
     return (
         <>
             <section class="text-gray-400 bg-gray-900 body-font overflow-hidden">

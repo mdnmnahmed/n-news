@@ -24,13 +24,13 @@ export default async function handlerCreatePost(req, res) {
         await dbConnect();
 
         const slug = slugify(title, {
-            remove: /[*+~.()'"!:@]/g
+            remove: /[*+,~.()'"!:@]/g
         });
 
         const newPost = new PostModal({
             ...req.body,
             postBy: session.token.id,
-            slug
+            slug: slug.toLocaleLowerCase()
         });
         const savedPost = await newPost.save();
         if (savedPost) {

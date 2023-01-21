@@ -11,7 +11,7 @@ export default async function handlerGetPosts(req, res) {
     try {
         await dbConnect();
         const allPosts = await PostModal.find();
-        console.log(allPosts);
+        // console.log(allPosts);
         if (allPosts) {
             responseHandler(res, allPosts);
         }
