@@ -3,9 +3,11 @@ import { validateInputFields } from "../../../utils_global/validateInputFields";
 import errorHandler from "../../../service_frontend/utils/errorHandler";
 import { apiCallsHandler } from "../../../service_frontend/utils/apiCallsHandler";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 export default function PostCreatePage() {
 
+    const { push } = useRouter();
     const titleRef = useRef();
     const topicRef = useRef();
     const descriptionRef = useRef();
