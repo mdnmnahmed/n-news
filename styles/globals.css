@@ -20,3 +20,21 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.n-text-ellipsis-2 {
+  display: -webkit-box;
+  /* max-width: 400px; */
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.n-text-ellipsis-3 {
+  display: -webkit-box;
+  /* max-width: 400px; */
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

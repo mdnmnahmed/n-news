@@ -35,9 +35,18 @@ const Navigation = ({ navColor }) => {
                             <Link href={`/`} className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-white">
                                 Home
                             </Link>
-                            <Link href={`/post/create`} className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-white">
-                                Create
-                            </Link>
+                            {state?.user?.authenticated && (
+                                <>
+                                    <Link href={`/post/create`} className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-white">
+                                        Create
+                                    </Link>
+
+                                    <Link href={`/profile`} className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-white">
+                                        Profile
+                                    </Link>
+                                </>
+                            )}
+
                         </div>
                         <div>
                             {state?.user?.authenticated ? (
